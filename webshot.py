@@ -15,6 +15,7 @@ class OutputView(webkit.WebView):
         pixbuf = gtk.gdk.Pixbuf(gtk.gdk.COLORSPACE_RGB, False, 8, rect.width, rect.height)
         pixbuf.get_from_drawable(root, root.get_colormap(), rect.x, rect.y, rect.x, rect.y, rect.width, rect.height)
         pixbuf.save(self.dst, "png", {})
+        gtk.main_quit()
 
 
 class Window(gtk.Window):
@@ -27,7 +28,6 @@ class Window(gtk.Window):
         self.scroll.add(self.output)
         self.add(self.scroll)
         self.scroll.show_all()
-        self.connect('delete-event', gtk.main_quit)
 
     def load(self, url):
         self.output.load_uri(url)
